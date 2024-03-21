@@ -1,19 +1,33 @@
 <script setup lang="ts">
-import {computed} from "vue";
-
-interface IProps {
-  color?: string;
+import { ref } from "vue";
+enum Position {
+  left = "left",
+  right = "right",
 }
-const props=defineProps<IProps>()
-const bgColor = props.color??'blue';
-const style = computed(()=>{
-  return 'height: 100px; width: 300px; margin: 5px; background-color:'+bgColor;
-})
+const count = ref(0);
+const side = ref(Position.left);
+const move = () => {
+  side.value = side.value === Position.left ? Position.right : Position.left;
+};
+const randomLinearColor = {
+  background: `linear-gradient(to right, #${Math.floor(
+    /*  */
+    Math.random() * 16777215
+  ).toString(16)}, #${Math.floor(Math.random() * 16777215).toString(16)})`,
+  borderRadius: "10px",
+  padding: "10px",
+};
 </script>
 
 <template>
-<div :style="style"></div>
+  <Teleport :to="`#${side}`">
+    <div :style="{ ...randomLinearColor }">
+      <button style="margin-right: 8px" @click="count++">
+        count is {{ count }}
+      </button>
+      <button @click="move()">move</button>
+    </div>
+  </Teleport>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
