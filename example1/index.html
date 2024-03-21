@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Example 1</title>
+    <link rel="stylesheet" type="text/css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .content{
+            display: flex;
+            flex-direction: row;
+        }
+        aside{
+            width: 300px;
+            background-color: blue;
+            height: 80vh;
+        }
+        main{
+            width: calc(100% - 300px);
+            background-color: green;
+            height: 80vh;
+        }
+        footer{
+            background-color: yellow;
+            height: 10vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header style="background-color: red;height: 10vh;width: 100%">
+</header>
+<div class="content">
+    <aside></aside>
+    <main></main>
+</div>
+<footer></footer>
+</body>
+</html>

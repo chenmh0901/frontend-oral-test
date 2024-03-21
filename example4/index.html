@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>example4</title>
+    <style>
+        header { height:100px; background-color:#666; }
+        #main { background-color:#999; }
+        .page{
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        footer { height:100px; background-color:#444;display: flex;margin-top: auto;}
+    </style>
+    <script>
+        let heavyWorker = (workid)=>{
+            return new Promise(resolve=>{
+                // 模 拟 大 量 任 务
+                setTimeout(()=>{
+                    console.log(workid);
+                    resolve(workid);
+                },10000*Math.random());
+            });
+        };
+        // 请 修 改 以 下 程 序
+        let tasks=[];
+        for(let i = 0; i < 20; ++i){
+            tasks.push(heavyWorker(i));
+        }
+        Promise.all(tasks).then(()=>{
+            console.log('end');
+        });
+    </script>
+</head>
+<body>
+<div class="page">
+    <header>header</header>
+    <div id="main">xxx</div>
+    <footer>footer</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>example3</title>
+    <style>
+        header { height:100px; background-color:#666; }
+        #main { background-color:#999; }
+        .page{
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        footer { height:100px; background-color:#444;display: flex;margin-top: auto;}
+    </style>
+    <script>
+        const timeout = ms => new Promise((resolve, reject) => setTimeout(() => reject('Timeout'), ms));
+        const fetchWithTimeout = (url, ms) => Promise.race([fetch(url), timeout(ms)]);
+        const fetchUrl = (index, url) => {
+            fetchWithTimeout(url, 5000)
+            .then(response => response.ok ? response.text() : Promise.reject(new Error('Failed to load')))
+            .then(data => {
+                console.log(`${index}_${url.length === 57 ? 'url1' : 'url2'}`, data);
+        })
+            .catch(error => {
+                console.error(`${index}_${url.length === 57 ? 'url1' : 'url2'}`, error.message);
+            });
+        }
+        for(let i = 2; i <= 7; i++) {
+            fetchUrl(i, `https://libs.cdnjs.net/typescript/4.3.${i}/typescript.min.js`);
+            fetchUrl(i, `https://notexist/${i}.js`);
+        }
+    </script>
+</head>
+<body>
+<div class="page">
+    <header>header</header>
+    <div id="main">xxx</div>
+    <footer>footer</footer>
+</div>
+</body>
+</html>
