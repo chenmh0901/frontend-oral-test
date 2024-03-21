@@ -1,12 +1,15 @@
 <script setup lang="ts">
 defineProps<{
   id: string;
+  amount: number;
 }>();
 </script>
 
 <template>
   <div>
-    <h1 style="text-transform: capitalize">{{ $props.id }}</h1>
+    <h1 style="text-transform: capitalize">
+      {{ $props.id }}: {{ $props.amount }}
+    </h1>
     <div class="side" :id="$props.id"></div>
   </div>
 </template>
